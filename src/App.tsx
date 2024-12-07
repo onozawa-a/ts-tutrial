@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 
 const Detail: React.FC<DetailProps> = props => {
-  const onNumOfPeopleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const num: number = Number(e.target.value);
+  const onNumOfPeopleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const num = Number(e.target.value);
     props.onNumOfPeopleChange(num);
   }
 
@@ -47,8 +47,8 @@ const Summary: React.FC<SummaryProps> = props => {
   );
 }
 
-class AdmissionFeeCalculator extends React.Component<{}, AdmissionFeeCalculatorState> {
-  constructor(props: {}) {
+class AdmissionFeeCalculator extends React.Component<object, AdmissionFeeCalculatorState> {
+  constructor(props: object) {
     super(props);
     const adults: FeeClassification = {
       name: "大人",
@@ -81,7 +81,7 @@ class AdmissionFeeCalculator extends React.Component<{}, AdmissionFeeCalculatorS
     this.state = { feeClassifications: [adults, students, children, infants] };
   }
 
-  handleNumOfPeopleChange(idx: number, num: number) {
+  handleNumOfPeopleChange(idx: number, num: number): void {
     const currentFC = this.state.feeClassifications[idx];
     const newTotalPrice = currentFC.unitPrice * num;
     // 人数と合計額以外は既存の値をコピー
@@ -132,10 +132,6 @@ type AdmissionFeeCalculatorState = {
 type DetailProps = {
   classification: FeeClassification;
   onNumOfPeopleChange: (num: number) => void;
-}
-
-type DetailState = {
-  numOfPeople: number;
 }
 
 type SummaryProps = {
