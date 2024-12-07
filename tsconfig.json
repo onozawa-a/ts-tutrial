@@ -11,8 +11,14 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "noImplicitAny": true,             // 暗黙的な "any" 型を禁止
+    "strictNullChecks": true,          // `null` や `undefined` の使用を厳密にチェック
+    "noImplicitThis": true,            // 暗黙的な "this" の型エラーを検出
+    "alwaysStrict": true,              // 全てのコードを strict モードで実行
+    "noUnusedLocals": true,            // 使用されていないローカル変数をエラーにする
+    "noUnusedParameters": true,        // 使用されていない関数パラメータをエラーにする
+    "noFallthroughCasesInSwitch": true, // `switch` 文のフォールスルーを禁止
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
