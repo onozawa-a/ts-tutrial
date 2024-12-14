@@ -41,7 +41,9 @@ class AdmissionFeeCalculator extends React.Component<object, AdmissionFeeCalcula
   }
 
   handleNumOfPeopleChange(idx: number, num: number): void {
-    const currentFC = this.state.feeClassifications[idx];
+    const { feeClassifications } = this.state;
+
+    const currentFC = feeClassifications[idx];
     const newTotalPrice = currentFC.unitPrice * num;
     // 人数と合計額以外は既存の値をコピー
     const newFC: FeeClassification = {
@@ -49,23 +51,24 @@ class AdmissionFeeCalculator extends React.Component<object, AdmissionFeeCalcula
       ...{ numOfPeople: num, totalPrice: newTotalPrice }
     }
     // 新たな配列を生成
-    const feeClassifications = this.state.feeClassifications.slice();
+    const fcf = feeClassifications.slice();
     feeClassifications[idx] = newFC;
 
     // stateの更新
-    this.setState({ feeClassifications: feeClassifications });
+    this.setState({ feeClassifications: fcf });
   }
 
   render() {
-    const details = this.state.feeClassifications.map((fc, idx) => {
+    const { feeClassifications } = this.state;
+    const details = feeClassifications.map((fc, idx) => {
       return (
         <Detail key={idx.toString()} classification={fc}
           onNumOfPeopleChange={n => this.handleNumOfPeopleChange(idx, n)} />
       );
     });
-    const numOfPeople = this.state.feeClassifications
+    const numOfPeople = feeClassifications
       .map(fc => fc.numOfPeople).reduce((p, c) => p + c);
-    const totalAmount = this.state.feeClassifications
+    const totalAmount = feeClassifications
       .map(fc => fc.totalPrice).reduce((p, c) => p + c);
 
     return [
